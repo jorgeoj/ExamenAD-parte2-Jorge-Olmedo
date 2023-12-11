@@ -24,8 +24,22 @@ public class CarDAO implements DAO<Car> {
     public Car save(Car car) {
 
         /* Implement method here */
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                // Guardar el nuevo elemento Item en la base de datos
+                session.save(car);
 
-        return car;
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            }
+            return car;
+        }
     }
 
     @Override
@@ -51,12 +65,16 @@ public class CarDAO implements DAO<Car> {
     public List<Car> getAllByManufacturer(String manufacturer){
         var out = new ArrayList<Car>();
 
-
         /* Implement method here */
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Car> query = session.createQuery("SELECT c FROM Car c WHERE c.manufacturer = :manufacturer", Car.class);
+            query.setParameter("manufacturer", manufacturer);
+            out = (ArrayList<Car>) query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
         return out;
     }
-
-
 
 }

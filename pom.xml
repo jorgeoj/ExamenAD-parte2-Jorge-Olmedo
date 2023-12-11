@@ -30,6 +30,11 @@
       <artifactId>hibernate-core</artifactId>
       <version>6.3.0.Final</version>
     </dependency>
+    <dependency>
+      <groupId>org.hibernate.orm</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>6.3.0.Final</version>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
     <dependency>
       <groupId>com.mysql</groupId>

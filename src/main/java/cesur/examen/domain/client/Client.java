@@ -3,6 +3,8 @@ package cesur.examen.domain.client;
 import cesur.examen.domain.car.Car;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,14 +20,23 @@ import java.util.List;
 
 
 @Data
+@Entity
+@Table(name = "cliente")
+@Getter
+@Setter
 public class Client implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "nombre")
     private String name;
 
+    @Column(name = "email")
     private String email;
 
+    @OneToMany(mappedBy = "client",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Car> cars = new ArrayList<Car>(0);
 
     /**

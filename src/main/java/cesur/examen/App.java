@@ -26,7 +26,7 @@ public class App
      */
 
     // Put your full name in the constant value
-    static final String STUDENT_NAME = "Francisco Romero";
+    static final String STUDENT_NAME = "Jorge Olmedo";
 
     public static void main( String[] args )
     {

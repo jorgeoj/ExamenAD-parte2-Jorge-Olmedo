@@ -4,6 +4,7 @@ import jdk.jshell.spi.ExecutionControlProvider;
 import lombok.Getter;
 import lombok.extern.java.Log;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 /**
@@ -35,7 +36,16 @@ public class HibernateUtil {
         try {
 
             /* Complete method here */
-            sessionFactory = null;
+            Configuration configuration = new Configuration();
+
+            configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/examenad");
+            configuration.setProperty("hibernate.connection.username", "root");
+            configuration.setProperty("hibernate.connection.password", "");
+            configuration.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
+
+            Configuration cfg = new Configuration();
+            cfg.configure();
+            sessionFactory = cfg.buildSessionFactory();
 
             log.info("SessionFactory not created yet!");
         } catch(Exception ex){

@@ -3,6 +3,8 @@ package cesur.examen.domain.car;
 import cesur.examen.domain.client.Client;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -16,16 +18,27 @@ import java.io.Serializable;
 
 
 @Data
+@Entity
+@Table(name = "garaje")
+@Getter
+@Setter
 public class Car implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "matricula")
     private String plate;
 
+    @Column(name = "modelo")
     private String model;
 
+    @Column(name = "fabricante")
     private String manufacturer;
 
+    @ManyToOne
+    @JoinColumn(name = "cliente", referencedColumnName = "id")
     private Client client;
 
     /**
