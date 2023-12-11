@@ -66,12 +66,10 @@ public class CarDAO implements DAO<Car> {
         var out = new ArrayList<Car>();
 
         /* Implement method here */
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<Car> query = session.createQuery("SELECT c FROM Car c WHERE c.manufacturer = :manufacturer", Car.class);
-            query.setParameter("manufacturer", manufacturer);
-            out = (ArrayList<Car>) query.getResultList();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        try ( Session s = HibernateUtil.getSessionFactory( ).openSession( ) ) {
+            Query<Car> q = s.createQuery( "from Car where manufacturer =: m " , Car.class );
+            q.setParameter( "m" , manufacturer );
+            out = ( ArrayList<Car> ) q.getResultList( );
         }
 
         return out;

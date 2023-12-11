@@ -20,8 +20,6 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "garaje")
-@Getter
-@Setter
 public class Car implements Serializable {
 
     @Id

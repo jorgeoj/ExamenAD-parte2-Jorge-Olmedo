@@ -6,6 +6,7 @@ import cesur.examen.domain.car.CarDAO;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * EXAMEN DE ACCESO A DATOS
@@ -29,6 +30,20 @@ public class ClientService {
         var out= new ArrayList<Client>(0);
 
         /* Implement method here */
+        var hashSet = new HashSet<Client>( 0 );
+        var todosClientes = new ArrayList<Client>( 0 );
+        ClientDAO clientDAO = new ClientDAO();
+        todosClientes = ( ArrayList<Client> ) clientDAO.getAll();
+
+        for (Client client: todosClientes){
+            for(Car car: client.getCars()){
+                if(Objects.equals(car.getManufacturer(), manufacturer)){
+                    hashSet.add(client);
+                }
+            }
+        }
+        out = (ArrayList<Client>) hashSet.stream().toList();
+
 
         return out;
     }

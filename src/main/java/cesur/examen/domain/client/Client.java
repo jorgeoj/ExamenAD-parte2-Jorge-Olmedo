@@ -2,9 +2,7 @@ package cesur.examen.domain.client;
 
 import cesur.examen.domain.car.Car;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,8 +20,8 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "cliente")
-@Getter
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Client implements Serializable {
 
     @Id
